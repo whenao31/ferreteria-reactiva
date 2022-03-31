@@ -1,6 +1,6 @@
 package co.com.sofka.app.ferreteria.collection;
 
-import co.com.sofka.app.ferreteria.model.Transaccion;
+import co.com.sofka.app.ferreteria.model.TransaccionEnum;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -18,7 +18,7 @@ public class AlmacenTransaccion {
 
     private HashMap<String, Long> items;
 
-    private Transaccion transaccion;
+    private TransaccionEnum transaccion;
 
     //Campos Producto
     private String productoIdentificacion;
@@ -58,7 +58,7 @@ public class AlmacenTransaccion {
     public AlmacenTransaccion() {
     }
 
-    public AlmacenTransaccion(String id, HashMap<String, Long> items, Transaccion transaccion, String idProducto, String nombreProducto, Double precio, Long cantidad, Long cantidadMaxima, Long cantidadMinima, String idFactura, LocalDate fecha, String nombreCliente, String idCliente, String telefonoCliente, String nombreVendedor, Double total, String idVolante, String nombreProveedor, String idProveedor) {
+    public AlmacenTransaccion(String id, HashMap<String, Long> items, TransaccionEnum transaccion, String idProducto, String nombreProducto, Double precio, Long cantidad, Long cantidadMaxima, Long cantidadMinima, String idFactura, LocalDate fecha, String nombreCliente, String idCliente, String telefonoCliente, String nombreVendedor, Double total, String idVolante, String nombreProveedor, String idProveedor) {
         this.id = id;
         this.items = items;
         this.transaccion = transaccion;

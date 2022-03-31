@@ -1,6 +1,6 @@
 package co.com.sofka.app.ferreteria.dto;
 
-import co.com.sofka.app.ferreteria.model.Transaccion;
+import co.com.sofka.app.ferreteria.model.TransaccionEnum;
 import lombok.Data;
 
 import java.util.HashMap;
@@ -17,12 +17,12 @@ public class VolanteDTO {
 
     private HashMap<String, Long> items;
 
-    private Transaccion transaccion;
+    private TransaccionEnum transaccion;
 
     public VolanteDTO() {
     }
 
-    public VolanteDTO(String idVolante, String nombreProveedor, String idProveedor, HashMap<String, Long> items, Transaccion transaccion) {
+    public VolanteDTO(String idVolante, String nombreProveedor, String idProveedor, HashMap<String, Long> items, TransaccionEnum transaccion) {
         this.volanteIdentificacion = idVolante;
         this.nombreProveedor = nombreProveedor;
         this.proveedorIdentificacion = idProveedor;

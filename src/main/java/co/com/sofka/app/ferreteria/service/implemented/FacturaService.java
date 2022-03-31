@@ -2,9 +2,8 @@ package co.com.sofka.app.ferreteria.service.implemented;
 
 import co.com.sofka.app.ferreteria.collection.AlmacenTransaccion;
 import co.com.sofka.app.ferreteria.dto.FacturaDTO;
-import co.com.sofka.app.ferreteria.model.Transaccion;
+import co.com.sofka.app.ferreteria.model.TransaccionEnum;
 import co.com.sofka.app.ferreteria.repository.AlmacenTransaccionRepository;
-import co.com.sofka.app.ferreteria.repository.FacturaRepository;
 import co.com.sofka.app.ferreteria.service.IServiceFactura;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +15,6 @@ import reactor.core.publisher.Mono;
 public class FacturaService implements IServiceFactura {
 
     @Autowired
-    private FacturaRepository facturaRepository;
-
-    @Autowired
-    private ServiceInventario serviceInventario;
-
-    @Autowired
     private AlmacenTransaccionRepository transaccionRepository;
 
     ModelMapper modelMapper= new ModelMapper();
@@ -30,24 +23,6 @@ public class FacturaService implements IServiceFactura {
     public Mono<FacturaDTO> save(FacturaDTO facturaDTO) {
         return transaccionRepository.save(modelMapper.map(facturaDTO, AlmacenTransaccion.class))
                 .flatMap(tran -> Mono.just(modelMapper.map(tran, FacturaDTO.class)));
-//        Flux.fromIterable(facturaDTO.getPedido().entrySet())
-//                        .map(entry -> {
-//                            System.out.println(entry.getKey() + entry.getValue());
-//                            return serviceInventario.findById(entry.getKey())
-//                                    .map(item -> serviceInventario.update(entry.getKey() ,item)
-//                                            .subscribe())
-//                                    .subscribe();
-//                        }).subscribe();
-//        facturaDTO.getPedido()
-//                .entrySet()
-//                .stream()
-//                .forEach(entry -> {
-//                    System.out.println(entry.getKey() + entry.getValue());
-//                    serviceInventario.findById(entry.getKey())
-//                            .map(item -> serviceInventario.update(entry.getKey() ,item));
-//                });
-//        return facturaRepository.save(modelMapper.map(facturaDTO, Factura.class))
-//                .map(factura -> modelMapper.map(factura, FacturaDTO.class));
     }
 
     @Override
@@ -60,7 +35,7 @@ public class FacturaService implements IServiceFactura {
     @Override
     public Flux<FacturaDTO> findAll() {
         return transaccionRepository.findAll()
-                .filter(tran -> tran.getTransaccion().equals(Transaccion.FACTURA))
+                .filter(tran -> tran.getTransaccion().equals(TransaccionEnum.FACTURA))
                 .flatMap(tran -> Mono.just(modelMapper.map(tran, FacturaDTO.class)));
     }
 
@@ -82,7 +57,7 @@ public class FacturaService implements IServiceFactura {
     public void restarInventario(String facturaId , FacturaDTO facturaDTO){
 
         transaccionRepository.findAll()
-                .filter(tran -> tran.getTransaccion().equals(Transaccion.PRODUCTO))
+                .filter(tran -> tran.getTransaccion().equals(TransaccionEnum.PRODUCTO))
                 .flatMap(tran -> {
                     var firstOfMap = facturaDTO.
                             getItems().entrySet().stream().findFirst().get();

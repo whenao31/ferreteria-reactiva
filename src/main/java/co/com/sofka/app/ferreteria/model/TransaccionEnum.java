@@ -1,5 +1,5 @@
 package co.com.sofka.app.ferreteria.model;
 
-public enum Transaccion {
+public enum TransaccionEnum {
     PRODUCTO, FACTURA, VOLANTE
 }

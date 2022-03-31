@@ -1,6 +1,6 @@
 package co.com.sofka.app.ferreteria.dto;
 
-import co.com.sofka.app.ferreteria.model.Transaccion;
+import co.com.sofka.app.ferreteria.model.TransaccionEnum;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -25,5 +25,5 @@ public class FacturaDTO {
 
     private HashMap<String, Long> items;
 
-    private Transaccion transaccion;
+    private TransaccionEnum transaccion;
 }

@@ -1,15 +1,12 @@
 package co.com.sofka.app.ferreteria.dto;
 
-import co.com.sofka.app.ferreteria.model.Transaccion;
+import co.com.sofka.app.ferreteria.model.TransaccionEnum;
 import lombok.Data;
 
-import java.util.HashMap;
 @Data
 public class ProductoDTO {
 
-    private HashMap<String, Long> items;
-
-    private Transaccion transaccion;
+    private TransaccionEnum transaccion;
 
     private String productoIdentificacion;
 
@@ -26,8 +23,7 @@ public class ProductoDTO {
     public ProductoDTO() {
     }
 
-    public ProductoDTO(HashMap<String, Long> items, Transaccion transaccion, String idProducto, String nombreProducto, Double precio, Long cantidad, Long cantidadMaxima, Long cantidadMinima) {
-        this.items = items;
+    public ProductoDTO(TransaccionEnum transaccion, String idProducto, String nombreProducto, Double precio, Long cantidad, Long cantidadMaxima, Long cantidadMinima) {
         this.transaccion = transaccion;
         this.productoIdentificacion = idProducto;
         this.nombreProducto = nombreProducto;
