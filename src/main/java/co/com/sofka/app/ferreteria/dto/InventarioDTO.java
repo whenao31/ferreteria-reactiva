@@ -12,13 +12,12 @@ import java.util.UUID;
 public class InventarioDTO {
     private String id = UUID.randomUUID().toString().substring(0, 10);
 
-    @NotBlank
     private Producto producto;
 
     private Long cantidad;
-    @NotBlank
+
     private Long cantidadMax;
-    @NotBlank
+
     private Long cantidadMin;
 
     private List<String> proveedores;
@@ -33,5 +32,21 @@ public class InventarioDTO {
         this.cantidadMax = cantidadMax;
         this.cantidadMin = cantidadMin;
         this.proveedores = proveedores;
+    }
+
+    public Boolean restar(Long cantidadSustraer){
+        if (this.cantidad - cantidadSustraer >= 0){
+            this.cantidad = this.cantidad - cantidadSustraer;
+            return true;
+        }
+        throw new IllegalArgumentException("No hay suficiente cantidad!");
+    }
+
+    public Boolean sumar(Long cantidadSumar){
+        if (this.cantidad + cantidadSumar > this.cantidadMax){
+            this.cantidad = this.cantidad + cantidadSumar;
+            return true;
+        }
+        throw new IllegalArgumentException("Se sobrepasa al maximo en stock!");
     }
 }
