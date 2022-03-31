@@ -30,10 +30,10 @@ public class InventarioMapper {
     }
 
     public Mono<InventarioDTO> fromMonoCollection(Mono<Inventario> articulo){
-        return articulo.flatMap(item -> Mono.just(fromCollection(item)));
+        return articulo.map(this::fromCollection);
     }
 
     public Flux<InventarioDTO> fromFluxCollection(Flux<Inventario> articulos){
-        return Flux.from(articulos.flatMap(item -> Mono.just(fromCollection(item))));
+        return articulos.map(item -> fromCollection(item));
     }
 }

@@ -21,12 +21,12 @@ public class InventarioDTO {
     @NotBlank
     private Long cantidadMin;
 
-    private List<Proveedor> proveedores;
+    private List<String> proveedores;
 
     public InventarioDTO() {
     }
 
-    public InventarioDTO(String id, Producto producto, Long cantidad, Long cantidadMax, Long cantidadMin, List<Proveedor> proveedores) {
+    public InventarioDTO(String id, Producto producto, Long cantidad, Long cantidadMax, Long cantidadMin, List<String> proveedores) {
         this.id = id;
         this.producto = producto;
         this.cantidad = cantidad;

@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.stream.Collectors;
-
 @Service
 public class ServiceInventario implements IServiceInventario {
 
@@ -58,13 +56,14 @@ public class ServiceInventario implements IServiceInventario {
     public Flux<InventarioDTO> findProductosPorProveedor(String proveedorId) {
         return mapper.fromFluxCollection(
                 inventarioRepository.findAll()
+                        .filter(item -> item.getProveedores() != null)
                         .flatMap(item -> {
                             return item.
                                     getProveedores()
                                     .stream()
-                                    .filter(prov -> prov.getId().equals(proveedorId)).count() > 0 ?
-                            Mono.just(item) :
-                            Mono.empty();
+                                    .filter(prov -> prov.equals(proveedorId)).count() > 0 ?
+                                    Mono.just(item) :
+                                    Mono.empty();
                         })
         );
     }

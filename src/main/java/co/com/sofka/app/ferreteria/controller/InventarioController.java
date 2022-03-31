@@ -3,12 +3,15 @@ package co.com.sofka.app.ferreteria.controller;
 import co.com.sofka.app.ferreteria.collection.Inventario;
 import co.com.sofka.app.ferreteria.dto.InventarioDTO;
 import co.com.sofka.app.ferreteria.service.implemented.ServiceInventario;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+//import java.util.logging.Logger;
 
 @RestController
 public class InventarioController {
