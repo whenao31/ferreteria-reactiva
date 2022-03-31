@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-@RestController(value = "/factura")
+@RestController(value = "/egreso/factura")
 public class FacturaController {
 
     @Autowired
