@@ -9,29 +9,31 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-@RestController(value = "/egreso/factura")
+@RestController
+@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/factura")
 public class FacturaController {
 
     @Autowired
     private FacturaService facturaService;
 
     @PostMapping
-    private ResponseEntity<Mono<FacturaDTO>> save(@RequestBody FacturaDTO facturaDTO){
+    public ResponseEntity<Mono<FacturaDTO>> save(@RequestBody FacturaDTO facturaDTO){
         return new ResponseEntity<Mono<FacturaDTO>>(facturaService.save(facturaDTO), HttpStatus.CREATED);
     }
 
     @GetMapping
-    private ResponseEntity<Flux<FacturaDTO>> findAll(){
+    public ResponseEntity<Flux<FacturaDTO>> findAll(){
         return new ResponseEntity<Flux<FacturaDTO>>(facturaService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    private ResponseEntity<Mono<FacturaDTO>> findById(@PathVariable("id") String id){
+    public ResponseEntity<Mono<FacturaDTO>> findById(@PathVariable("id") String id){
         return new ResponseEntity<Mono<FacturaDTO>>(facturaService.findById(id), HttpStatus.OK);
     }
 
     @PutMapping("/{idFactura}")
-    private Mono<ResponseEntity<FacturaDTO>> update(@PathVariable("idFactura") String idFactura, @RequestBody FacturaDTO facturaDTO){
+    public Mono<ResponseEntity<FacturaDTO>> update(@PathVariable("idFactura") String idFactura, @RequestBody FacturaDTO facturaDTO){
         return facturaService.update(idFactura, facturaDTO)
                 .flatMap(facturaDTO1 -> Mono.just(ResponseEntity.ok(facturaDTO1)))
                 .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));

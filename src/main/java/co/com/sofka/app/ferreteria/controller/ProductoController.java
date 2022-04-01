@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-@RestController(value = "/inventario")
+@RestController
+@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/inventario")
 public class ProductoController {
 
     @Autowired
