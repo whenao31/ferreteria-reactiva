@@ -43,6 +43,7 @@ public class FacturaService implements IServiceFactura {
     public Mono<FacturaDTO> update(String id, FacturaDTO facturaDTO) {
         return findById(id)
                 .flatMap( facturaDTO1 -> {
+                    facturaDTO.setId(facturaDTO1.getId());
                     facturaDTO.setFacturaIdentificacion(id);
                     return save(facturaDTO);
                 });

@@ -43,6 +43,7 @@ public class ProductoService implements IProductoService {
     public Mono<ProductoDTO> update(String id, ProductoDTO productoDTO) {
         return findById(id)
                 .flatMap(prod -> {
+                    productoDTO.setId(prod.getId());
                     productoDTO.setProductoIdentificacion(id);
                     return save(productoDTO);
                 });

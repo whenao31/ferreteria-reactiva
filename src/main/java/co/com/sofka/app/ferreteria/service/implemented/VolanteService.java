@@ -44,6 +44,7 @@ public class VolanteService implements IVolanteService {
     public Mono<VolanteDTO> update(String id, VolanteDTO volanteDTO) {
         return findById(id)
                 .flatMap(volante -> {
+                    volanteDTO.setId(volante.getId());
                     volanteDTO.setVolanteIdentificacion(id);
                     return save(volanteDTO);
                 });
