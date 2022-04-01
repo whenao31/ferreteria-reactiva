@@ -9,7 +9,7 @@ const PageRoutes = () => {
         <Routes>
             <Route path='/' element={<Login/>} />
             <Route path='/signup' element={<Register/>} />
-            <Route path='/main' element={<Dashboard />} />
+            <Route path='/dashboard' element={<Dashboard />} />
         </Routes>
     )
 }

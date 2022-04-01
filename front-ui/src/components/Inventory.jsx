@@ -1,5 +1,9 @@
+import React from "react";
 
-        // <img src={Logo} alt="" />
-        // <h1>Reto final - Client Side</h1>
-        // <BuscadorProducto />
-        // <ResultadoProducto />
+const Inventory = () => {
+        return(
+                <><h1>Inventario</h1></>
+        )
+}
+
+export default Inventory;

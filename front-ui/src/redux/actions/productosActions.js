@@ -9,14 +9,14 @@ export const fetchProductosRequest = () => {
     }
 }
 
-export const fetchProductosSuccess = () => {
+export const fetchProductosSuccess = (list) => {
     return {
         type: FETCH_PRODUCTOS_SUCCESS,
-        payload: productList
+        payload: list
     }
 }
 
-export const fetchProductosFailure = () => {
+export const fetchProductosFailure = (error) => {
     return {
         type: FETCH_PRODUCTOS_FAILURE,
         payload: error
@@ -24,18 +24,24 @@ export const fetchProductosFailure = () => {
 }
 
 const fetchProductos = () => {
-    return (dispatch) => {
-        // fetch(process.env.REACT_APP_BASE_URL, {
-        //     method: 'GET', // *GET, POST, PUT, DELETE, etc.
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     })
-        //     .then(response => response.json())
-        //     .then(json => {
-        //         setCharacters(json.results);
-        //       dispatch({ type: searchTypes.REQUEST_ALL_RESULT, payload: json.results });
-        //     })
+    return async (dispatch) => {
+        dispatch(fetchProductosRequest());
+        fetch(`http://localhost:8080/inventario/producto`, {
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            })
+            .then(response => {
+                return response.json()})
+            .then(json => {
+              dispatch(fetchProductosSuccess(json));
+            })
+            .catch(error =>{
+                dispatch(fetchProductosFailure('No encontrado'));
+            });
     }
     
 }
+
+export default fetchProductos;

@@ -1,6 +1,8 @@
 import React from 'react'
 
 const ResultadoProducto = () => {
+
+
     return(
         <div>
             <h3 className="h3 text-white">Resultado: </h3>
