@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import fetchProductos from "../../redux/actions/productosActions";
 
@@ -6,8 +6,9 @@ const BuscadorProducto = () => {
 
     const dispatch = useDispatch();
 
+    useEffect(() => dispatch(fetchProductos()), []);
+    
     const onClickHandle = () => {
-        console.log(`${process.env.REACT_APP_BASE_URL}/inventario`);
         dispatch(fetchProductos());
     }
 

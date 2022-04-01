@@ -1,3 +1,5 @@
+import { BASE_URL } from "../../config";
+
 export const FETCH_PRODUCTOS_REQUEST = 'FETCH_PRODUCTOS_REQUEST';
 export const FETCH_PRODUCTOS_SUCCESS = 'FETCH_PRODUCTOS_SUCCESS';
 export const FETCH_PRODUCTOS_FAILURE = 'FETCH_PRODUCTOS_FAILURE';
@@ -26,7 +28,7 @@ export const fetchProductosFailure = (error) => {
 const fetchProductos = () => {
     return async (dispatch) => {
         dispatch(fetchProductosRequest());
-        fetch(`http://localhost:8080/inventario/producto`, {
+        fetch(`${BASE_URL}inventario/producto`, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             headers: {
                 'Content-Type': 'application/json'

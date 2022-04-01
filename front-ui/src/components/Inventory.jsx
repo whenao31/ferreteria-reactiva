@@ -1,8 +1,11 @@
 import React from "react";
+import ResultadoProducto from "./buscador/ResultadoProducto";
 
 const Inventory = () => {
-        return(
-                <><h1>Inventario</h1></>
+        return (
+                <>
+                        <ResultadoProducto />
+                </>
         )
 }
 
