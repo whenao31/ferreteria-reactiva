@@ -9,6 +9,8 @@ import java.util.UUID;
 @Data
 public class VolanteDTO {
 
+    private String id;
+
     private String volanteIdentificacion = UUID.randomUUID().toString().substring(0, 10);
 
     private String nombreProveedor;

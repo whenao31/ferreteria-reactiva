@@ -9,6 +9,8 @@ import java.util.HashMap;
 @Data
 public class FacturaDTO {
 
+    private String id;
+
     private String facturaIdentificacion;
 
     private LocalDate fecha;

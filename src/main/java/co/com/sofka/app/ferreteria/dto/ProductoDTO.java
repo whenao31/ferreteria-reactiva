@@ -6,6 +6,8 @@ import lombok.Data;
 @Data
 public class ProductoDTO {
 
+    private String id;
+
     private TransaccionEnum transaccion;
 
     private String productoIdentificacion;
