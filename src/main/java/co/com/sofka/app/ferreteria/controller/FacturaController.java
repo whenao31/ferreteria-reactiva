@@ -1,6 +1,7 @@
 package co.com.sofka.app.ferreteria.controller;
 
 import co.com.sofka.app.ferreteria.dto.FacturaDTO;
+import co.com.sofka.app.ferreteria.dto.FacturaIdDTO;
 import co.com.sofka.app.ferreteria.service.implemented.FacturaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -37,6 +40,11 @@ public class FacturaController {
         return facturaService.update(idFactura, facturaDTO)
                 .flatMap(facturaDTO1 -> Mono.just(ResponseEntity.ok(facturaDTO1)))
                 .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
+    }
+
+    @GetMapping("/factura/sortedIds")
+    private ResponseEntity<Mono<List<String>>> getLastId(){
+        return new ResponseEntity<Mono<List<String>>>(facturaService.getSortedFacturaIds(), HttpStatus.OK);
     }
 
 }
