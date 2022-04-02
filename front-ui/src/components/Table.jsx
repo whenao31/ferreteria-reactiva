@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { useTable, usePagination, useRowSelect, useGlobalFilter, } from 'react-table'
 
 import GlobalFilter from './GlobalFilter'
+import { useDispatch } from 'react-redux'
+import { setSelectedTableProductos } from '../redux/actions/tableSelectionAction'
 
 export const StylesTable = styled.div`
   padding: 1rem;
@@ -54,7 +56,7 @@ const IndeterminateCheckbox = React.forwardRef(
   }
 )
 
-function Table({ columns, data }) {
+function Table({ columns, data, entity }) {
   // Use the state and functions returned from useTable to build your UI
   const {
     getTableProps,
@@ -102,7 +104,7 @@ function Table({ columns, data }) {
           // to the render a checkbox
           Cell: ({ row }) => (
             <div>
-              <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
+              <IndeterminateCheckbox {...row.getToggleRowSelectedProps() } />
             </div>
           ),
         },
@@ -110,6 +112,18 @@ function Table({ columns, data }) {
       ])
     }
   )
+
+  const dispatch = useDispatch();
+
+  const selection = selectedFlatRows.map(
+    d => d.original
+  )
+
+  useEffect(() => {
+    if (entity === "PRODUCTO"){
+        dispatch(setSelectedTableProductos(selection));
+    }
+  }, [selection])
 
   // Render the UI for your table
   return (
@@ -198,20 +212,6 @@ function Table({ columns, data }) {
             </option>
           ))}
         </select>
-        {/* <pre>
-          <code>
-            {JSON.stringify(
-              {
-                selectedRowIds: selectedRowIds,
-                'selectedFlatRows[].original': selectedFlatRows.map(
-                  d => d.original
-                ),
-              },
-              null,
-              2
-            )}
-          </code>
-        </pre> */}
       </div>
     </>
   )

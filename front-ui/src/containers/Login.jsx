@@ -9,6 +9,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { getFirestore, doc, collection, setDoc } from "firebase/firestore";
+import CrearProductoForm from "../components/forms/CrearProductoForm";
 
 const auth = getAuth(firebaseApp);
 

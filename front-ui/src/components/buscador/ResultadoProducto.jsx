@@ -7,9 +7,6 @@ const ResultadoProducto = () => {
 
   const productos = useSelector((state) => state.getProductos);
   const productoData = productos.list;
-
-  console.log(productoData);
-
   const data = useMemo(() => productoData)
 
   const columns = useMemo(
@@ -52,7 +49,7 @@ const ResultadoProducto = () => {
 
   return (
     <StylesTable>
-      <Table columns={columns} data={data} />
+      <Table columns={columns} data={data} entity={"PRODUCTO"}/>
     </StylesTable>
     // <table {...getTableProps()} style={{ border: 'solid 1px blue' }}>
     //   <thead>
