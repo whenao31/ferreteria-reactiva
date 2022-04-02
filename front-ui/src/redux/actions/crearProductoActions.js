@@ -1,10 +1,13 @@
 import { BASE_URL } from "../../config";
 
+//tipos para generar Id de nuevo producto
 export const FETCH_PRODUCTOSID_REQUEST = 'FETCH_PRODUCTOSID_REQUEST';
 export const FETCH_PRODUCTOSID_SUCCESS = 'FETCH_PRODUCTOSID_SUCCESS';
 export const FETCH_PRODUCTOSID_FAILURE = 'FETCH_PRODUCTOSID_FAILURE';
+//tipos para creacion de nuevo producto
+export const CREAR_NUEVO_PRODUCTO = 'CREAR_NUEVO_PRODUCTO';
 
-// Actions
+// Actions para generar Id de nuevo prodcuto
 export const fetchProductosIDRequest = () => {
     return {
         type: FETCH_PRODUCTOSID_REQUEST
@@ -24,6 +27,16 @@ export const fetchProductosIDFailure = (error) => {
         payload: error
     }
 }
+
+//Actions crear nuevo producto
+export const crearNuevoProducto = (nuevoProducto) => {
+    return {
+        type: CREAR_NUEVO_PRODUCTO,
+        payload: nuevoProducto
+    }
+}
+
+//fetch requests 
 
 const fetchProductoIds = () => {
     return async (dispatch) => {

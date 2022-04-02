@@ -122,7 +122,7 @@ const MySelect = ({ label, ...props }) => {
 const VolanteForm = () => {
   return (
     <>
-      <h1>Subscribe!</h1>
+      <h1>Gestión Volante</h1>
       <Formik
         initialValues={{
         volanteIdentificacion: '',

@@ -1,5 +1,5 @@
 import React from "react"
-import VolanteForm from "./forms/VolanteForm";
+import VolanteForm from "../components/forms/VolanteForm";
 
 
 const Volante = () => {
