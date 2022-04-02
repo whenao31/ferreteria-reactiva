@@ -13,4 +13,8 @@ public interface IProductoService {
     Flux<ProductoDTO> findAll();
 
     Mono<ProductoDTO> update(String id, ProductoDTO productoDTO);
+
+    Mono<ProductoDTO> addCantidad(String id, Long cantidadSumar);
+
+    Mono<ProductoDTO> subtractCantidad(String id, Long cantidadRestar);
 }

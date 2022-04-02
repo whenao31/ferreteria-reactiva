@@ -39,5 +39,17 @@ public class ProductoController {
                 .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
     }
 
+    @PutMapping("/producto/{idProducto}/add/{cantidad}")
+    private Mono<ResponseEntity<ProductoDTO>> addCantidad(@PathVariable("idProducto") String idProducto, @PathVariable("cantidad") Long cantidadSumar){
+        return productoService.addCantidad(idProducto, cantidadSumar)
+                .flatMap(prod -> Mono.just(ResponseEntity.ok(prod)))
+                .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
+    }
 
+    @PutMapping("/producto/{idProducto}/subtract/{cantidad}")
+    private Mono<ResponseEntity<ProductoDTO>> subtractCantidad(@PathVariable("idProducto") String idProducto, @PathVariable("cantidad") Long cantidadRestar){
+        return productoService.subtractCantidad(idProducto, cantidadRestar)
+                .flatMap(prod -> Mono.just(ResponseEntity.ok(prod)))
+                .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
+    }
 }

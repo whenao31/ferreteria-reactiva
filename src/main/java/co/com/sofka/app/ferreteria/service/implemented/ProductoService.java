@@ -48,4 +48,22 @@ public class ProductoService implements IProductoService {
                     return save(productoDTO);
                 });
     }
+
+    @Override
+    public Mono<ProductoDTO> addCantidad(String id, Long cantidadSumar) {
+        return findById(id)
+                .flatMap(prod -> {
+                    prod.addCantidad(cantidadSumar);
+                    return save(prod);
+                });
+    }
+
+    @Override
+    public Mono<ProductoDTO> subtractCantidad(String id, Long cantidadRestar) {
+        return findById(id)
+                .flatMap(prod -> {
+                    prod.subtractCantidad(cantidadRestar);
+                    return save(prod);
+                });
+    }
 }

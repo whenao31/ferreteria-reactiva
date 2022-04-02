@@ -34,4 +34,12 @@ public class ProductoDTO {
         this.cantidadMaxima = cantidadMaxima;
         this.cantidadMinima = cantidadMinima;
     }
+
+    public void addCantidad(Long cantidadAdd){
+        this.cantidad = this.cantidad + cantidadAdd;
+    }
+
+    public void subtractCantidad(Long cantidadSubtract){
+        this.cantidad = this.cantidad - cantidadSubtract;
+    }
 }

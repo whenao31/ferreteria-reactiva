@@ -16,12 +16,14 @@ public class AlmacenTransaccionDTO {
 
     private TransaccionEnum transaccion;
 
+    private LocalDate fecha;
+
+    private Double precio;
+
     //Campos Producto
     private String productoIdentificacion;
 
     private String nombreProducto;
-
-    private Double precio;
 
     private Long cantidad;
 
@@ -31,8 +33,6 @@ public class AlmacenTransaccionDTO {
 
     //    Campos Factura
     private String facturaIdentificacion;
-
-    private LocalDate fecha;
 
     private String nombreCliente;
 
