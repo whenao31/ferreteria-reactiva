@@ -16,7 +16,6 @@ const Volante = () => {
 
     return (
         <>
-            <VolanteForm />
             <hr/>
             <ResultadoVolantes />
         </>

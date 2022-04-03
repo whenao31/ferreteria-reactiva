@@ -7,6 +7,7 @@ import { productoVolanteReducer } from "../../redux/reducer/reducerCrearVolante"
 import genConsecutivo from "../../utils/genConsecutivo";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
+import { aumentarProducto } from "../../redux/actions/productosAPIActions";
 
 
 const CrearVolanteForm = () => {
@@ -85,7 +86,9 @@ const CrearVolanteForm = () => {
                   return ; 
             }
         }
-
+        //Modifico cantidad en backend
+        dispatch(aumentarProducto(productoIdentificacion, cantidad));
+        //Adiciono a la lista de productos del volante
         dispatch(addProductoVolante({
             productoIdentificacion: productoIdentificacion,
             cantidad: cantidad,
