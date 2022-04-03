@@ -4,8 +4,11 @@ import { BASE_URL } from "../../config";
 export const FETCH_PRODUCTOSID_REQUEST = 'FETCH_PRODUCTOSID_REQUEST';
 export const FETCH_PRODUCTOSID_SUCCESS = 'FETCH_PRODUCTOSID_SUCCESS';
 export const FETCH_PRODUCTOSID_FAILURE = 'FETCH_PRODUCTOSID_FAILURE';
-//tipos para creacion de nuevo producto
+
+//tipos para manejar lista de nuevo producto
 export const CREAR_NUEVO_PRODUCTO = 'CREAR_NUEVO_PRODUCTO';
+export const ELIMINAR_PRODUCTO_LOCAL = 'ELIMINAR_PRODUCTO_LOCAL'
+export const RESET_LISTA_PRODUCTOS_LOCAL = 'RESET_LISTA_PRODUCTOS_LOCAL'
 
 // Actions para generar Id de nuevo prodcuto
 export const fetchProductosIDRequest = () => {
@@ -29,12 +32,25 @@ export const fetchProductosIDFailure = (error) => {
 }
 
 //Actions crear nuevo producto
-export const crearNuevoProducto = (nuevoProducto) => {
+export const manageProductosLocal = (nuevoProducto) => {
     return {
         type: CREAR_NUEVO_PRODUCTO,
         payload: nuevoProducto
     }
 }
+
+export const eliminarProductoLocal = (productoIdentificacion) => {
+    return {
+        type: ELIMINAR_PRODUCTO_LOCAL,
+        payload: productoIdentificacion
+    }
+}
+
+export const resetListaProductoLocal = () => {
+    return {
+        type: RESET_LISTA_PRODUCTOS_LOCAL
+    }
+} 
 
 //fetch requests 
 

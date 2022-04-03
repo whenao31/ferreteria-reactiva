@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
 import { useCustomForm } from "../../customhook/useCustomForm";
-import { crearNuevoProducto } from "../../redux/actions/crearProductoActions";
+import { manageProductosLocal } from "../../redux/actions/crearProductoActions";
 import genConsecutivo from "../../utils/genConsecutivo";
+import "react-toastify/dist/ReactToastify.css";
 
 
 const CrearProductoForm = () => {
@@ -14,7 +16,7 @@ const CrearProductoForm = () => {
     const dispatch = useDispatch();
 
     const lastId = useSelector((state) => state.getProductoLastId);
-    const newProductList = useSelector((state) => state.crearNuevoProducto);
+    const newProductList = useSelector((state) => state.manageProductosLocal);
 
     useEffect(() => {
         newProductList.newList.length === 0 ?
@@ -24,6 +26,7 @@ const CrearProductoForm = () => {
             );
     }, [lastId, newProductList ])    
 
+    // Control del input nombreProducto
     const [inputs, handleChange, reset] = useCustomForm({
         nombreProducto: "",
     });
@@ -31,22 +34,25 @@ const CrearProductoForm = () => {
     const {nombreProducto, } = inputs;
 
     const handleSubmit = (event) => {
+        
 
         event.preventDefault();
         if (!nombreProducto.trim()){
             setState(true);
             return;         
         }
-        dispatch(crearNuevoProducto({
+        dispatch(manageProductosLocal({
             productoIdentificacion: consecutivoState,
             nombreProducto:nombreProducto
         }));
+        toast.success("Producto creado");
         setState(false);
         reset();
     };
 
     return (
         <div className="container">
+            <h2>Crear producto</h2>
             <form onSubmit={handleSubmit}>
                 <input 
                     type='text'
@@ -61,10 +67,11 @@ const CrearProductoForm = () => {
                     type="text" 
                     value={consecutivoState} 
                     name= 'productoIdentificacion'
-                    class="left field" 
+                    className="left field" 
                     readOnly
                 />
                 <input type='submit' className='btn btn-outline-info'/>
+                <ToastContainer autoClose={500} />
             </form>
         </div>
     )

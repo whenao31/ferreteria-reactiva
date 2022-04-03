@@ -1,4 +1,4 @@
-import { FETCH_PRODUCTOS_REQUEST, FETCH_PRODUCTOS_SUCCESS, FETCH_PRODUCTOS_FAILURE } from "../actions/productosActions"
+import { FETCH_VOLANTES_REQUEST, FETCH_VOLANTES_SUCCESS, FETCH_VOLANTES_FAILURE } from "../actions/volanteAPIActions"
 
 const initialState = {
     loading: false,
@@ -6,19 +6,19 @@ const initialState = {
     error: ''
 }
 
-const getProductos = (state = initialState, action) => {
+const getVolantes = (state = initialState, action) => {
     switch(action.type) {
-        case FETCH_PRODUCTOS_REQUEST:
+        case FETCH_VOLANTES_REQUEST:
             return {
                 ...state, loading: true
             }
-        case FETCH_PRODUCTOS_SUCCESS:
+        case FETCH_VOLANTES_SUCCESS:
             return {
                 loading: false,
                 list: action.payload,
                 error: ''
             }
-        case FETCH_PRODUCTOS_FAILURE:
+        case FETCH_VOLANTES_FAILURE:
             return {
                 loading: false,
                 list: [],
@@ -28,4 +28,4 @@ const getProductos = (state = initialState, action) => {
     }
 }
 
-export default getProductos;
+export default getVolantes;
