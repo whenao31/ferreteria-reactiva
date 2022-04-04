@@ -1,4 +1,5 @@
 import { BASE_URL } from "../../config";
+import { clearProductoVolante } from "./volanteCrearActions";
 
 export const FETCH_VOLANTES_REQUEST = 'FETCH_VOLANTES_REQUEST';
 export const FETCH_VOLANTES_SUCCESS = 'FETCH_VOLANTES_SUCCESS';
@@ -84,7 +85,10 @@ export const postVolantes = (request) => {
             .then(response => {
                 return response.json()})
             .then(json => {
-              dispatch(postVolantesSuccess(json));
+                dispatch(postVolantesSuccess(json));
+                if(json.error === undefined){
+                    dispatch(clearProductoVolante())
+                }
             })
             .catch(error =>{
                 dispatch(postVolantesFailure('No encontrado'));

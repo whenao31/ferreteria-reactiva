@@ -79,7 +79,9 @@ const CrearProductoForm = () => {
             productoIdentificacion: consecutivoState,
             nombreProducto: nombreProducto,
             cantidadMaxima: cantidadMaxima,
-            cantidadMinima: cantidadMinima
+            cantidadMinima: cantidadMinima,
+            cantidad: 0,
+            precio: 0,
         }
         console.log(JSON.stringify(body));
 

@@ -4,6 +4,7 @@ import {
     CREAR_NUEVO_PROVEEDOR,
     ADD_PRODUCTO_VOLANTE,
     REMOVE_PRODUCTO_VOLANTE,
+    CLEAR_PRODUCTOS_VOLANTE
 } from '../actions/volanteCrearActions'
 
 const initialNuevoProveedor = {
@@ -51,6 +52,8 @@ export const productoVolanteReducer = (state = initialProductoVolante, action) =
                 list: state.list.filter(item => !item.productoIdentificacion.includes(action.payload)),
             }
         }
+        case CLEAR_PRODUCTOS_VOLANTE:
+            return initialProductoVolante
         default: return state
     }
 }

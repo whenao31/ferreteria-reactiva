@@ -1,102 +1,100 @@
-import React from "react";
 import { useState } from "react";
-import Logo from '../assets/img/logo.png'
+import { Link, useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase/credentials";
+import Validate from "../components/Validate";
 
-import firebaseApp from "../firebase/credentials";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import { getFirestore, doc, collection, setDoc } from "firebase/firestore";
-import CrearProductoForm from "../components/forms/CrearProductoForm";
+const Login = () => {
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
 
-const auth = getAuth(firebaseApp);
+  const navigate = useNavigate();
 
+  const handleChange = ({ target: { name, value } }) => {
+    setUser({ ...user, [name]: value });
+  };
 
-function Login(){
-  const firestore = getFirestore(firebaseApp);
-  const [isRegistrando, setIsRegistrando] = useState(false);
-
-  const [pwdValidate, setPwdValidate] = useState(true);
-
-  async function registrarUsuario(email, password, rol) {
-    const infoUsuario = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    ).then((usuarioFirebase) => {
-      return usuarioFirebase;
-    });
-
-    console.log(infoUsuario.user.uid);
-    const docuRef = doc(firestore, `usuarios/${infoUsuario.user.uid}`);
-    setDoc(docuRef, { correo: email, rol: rol });
-  }
-
-  function submitHandler(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
 
-    const email = e.target.elements.email.value;
-    const password = e.target.elements.password.value;
-    const rol = e.target.elements.rol.value;
-
-    if (password.length < 6){
-      setPwdValidate(false);
-      return;
+    try {
+      const userCredentials = await signInWithEmailAndPassword(
+        auth,
+        user.email,
+        user.password
+      );
+      console.log(userCredentials);
+      navigate("/");
+    } catch (error) {
+      console.log(error.code);
+      setError(error.code);
+      if (error.code === "auth/invalid-email") {
+        setError("Email Invalido");
+      } else if (error.code === "auth/wrong-password") {
+        setError("La contraseña es Incorrecta");
+      } else if (error.code === "auth/user-not-found") {
+        setError("El usuario no esta registrado");
+      }
     }
-    setPwdValidate(true);
-    console.log("submit", email, password, rol);
-
-    if (isRegistrando) {
-      // registrar
-      registrarUsuario(email, password, rol);
-    } else {
-      // login
-      signInWithEmailAndPassword(auth, email, password);
-    }
-  }
+  };
 
   return (
-    <div className="hero" >
-     <div className="div-logo">
-        <img className="logo" src={Logo} />
-     </div>
-      
-      <h1 className="title" >{isRegistrando ? "Regístrate" : "Inicia sesión"}</h1>
+    <div className="bg-slate-300 h-screen flex text-white">
+      <div className=" w-full max-w-xs m-auto ">
+        {error && <Validate message={error} />}
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        >
+          <div className="mb-4">
+            <label
+              htmlFor="email"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+              Email
+            </label>
+            <input
+              type="email"
+              name="email"
+              placeholder="youremail@company.ltd"
+              onChange={handleChange}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="password"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+              Password
+            </label>
+            <input
+              type="password"
+              name="password"
+              onChange={handleChange}
+              placeholder="**********"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          <button
+            className="bg-blue-500 hover:bg-blue-700
+        text-white text-sm font-bold py-2 px-4 rounded
+        focus:outline-none focus:shadow-outline "
+          >
+            Iniciar Sesion
+          </button>
+        </form>
 
-      <form className="form-login" onSubmit={submitHandler}>
-        <label className="from-login-label" >
-          Correo electrónico:
-          <input type="email" id="email" />
-        </label>
-
-        <label>
-          Contraseña:
-          <input type="password" id="password" />
-          <span/>{pwdValidate ? "":"Password  requerida de mas de 6 caracteres" }            
-        </label>
-
-        <label>
-          Rol:
-          <select id="rol">
-            <option value="admin">Administrador</option>
-            <option value="user">Usuario</option>
-          </select>
-        </label>
-
-        <input
-          type="submit"
-          value={isRegistrando ? "Registrar" : "Iniciar sesión"}
-        />
-      </form>
-
-      <button className="form-login" onClick={() => setIsRegistrando(!isRegistrando)}>
-        {isRegistrando ? "Ya tengo una cuenta" : "Quiero registrarme"}
-      </button>
+        <p className="my-4 text-sm flex justify-between px-3 text-black">
+          No tienes una cuenta <Link to="/signup">Registrate</Link>
+        </p>
+      </div>
     </div>
   );
-}
-
+};
 
 export default Login

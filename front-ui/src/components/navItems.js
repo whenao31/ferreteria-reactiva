@@ -2,13 +2,13 @@ export const navItems = [
     {
         id:1,
         title: "Home",
-        path: "/",
+        path: "/login",
         cName: "nav-item"
     },
     {
         id:2,
         title: "Dashboard",
-        path: "/dashboard",
+        path: "/",
         cName: "nav-item"
     },
     {
@@ -27,6 +27,12 @@ export const navItems = [
         id:5,
         title: "Factura",
         path: "/factura",
+        cName: "nav-item"
+    },
+    {
+        id:5,
+        title: "SignUp",
+        path: "/signup",
         cName: "nav-item"
     }
     

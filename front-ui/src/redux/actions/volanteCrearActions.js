@@ -7,6 +7,7 @@ export const CREAR_NUEVO_VOLANTEID = "CREAR_NUEVO_VOLANTEID";
 export const CREAR_NUEVO_PROVEEDOR = 'CREAR_NUEVO_PROVEEDOR';
 export const ADD_PRODUCTO_VOLANTE = 'ADD_PRODUCTO_VOLANTE';
 export const REMOVE_PRODUCTO_VOLANTE = 'REMOVE_PRODUCTO_VOLANTE';
+export const CLEAR_PRODUCTOS_VOLANTE = 'CLEAR_PRODUCTOS_VOLANTE'
 
 
 //Actions crear nuevo volante
@@ -43,5 +44,11 @@ export const removeProductoVolante = (producto) => {
     return {
         type: REMOVE_PRODUCTO_VOLANTE,
         payload: producto
+    }
+}
+
+export const clearProductoVolante = () => {
+    return {
+        type: CLEAR_PRODUCTOS_VOLANTE
     }
 }

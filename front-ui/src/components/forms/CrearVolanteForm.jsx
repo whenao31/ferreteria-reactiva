@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useCustomForm } from "../../customhook/useCustomForm";
 import { manageProductosLocal } from "../../redux/actions/crearProductoActions";
-import { addProductoVolante, ADD_PRODUCTO_VOLANTE } from "../../redux/actions/volanteCrearActions";
-import { productoVolanteReducer } from "../../redux/reducer/reducerCrearVolante";
 import genConsecutivo from "../../utils/genConsecutivo";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'

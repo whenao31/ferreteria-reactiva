@@ -10,7 +10,7 @@ import { crearNuevoProveedor } from "../../redux/actions/volanteCrearActions";
 const CrearProveedorForm = () => {
 
     const [state, setState] = useState(false);
-    const [consecutivoState, setConsecutivo] = useState('');
+    const [consecutivoState, setConsecutivo] = useState('PROV-0001');
     
     //Dispacth para manejar nuevos proveedors
     const dispatch = useDispatch();
