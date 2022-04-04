@@ -48,7 +48,7 @@ const Login = () => {
   return (
     <div className="containerform">
       <div className="form">
-        {error && <Validate message={error} />}
+        <span className="text-danger text-small d-block mb-2">{error && error}</span>
         <form
           onSubmit={handleSubmit}
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"

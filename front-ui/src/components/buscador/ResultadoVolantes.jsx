@@ -95,7 +95,7 @@ const ResultadoVolantes = () => {
 
   return (
     <div>
-      <h1>Volantes..!</h1>
+      <h1>Volantes</h1>
       <StylesTable>
             <TableVolante columns={columns} data={data} renderRowSubComponent={renderRowSubComponent} />
       </StylesTable>
