@@ -1,8 +1,11 @@
 package co.com.sofka.app.ferreteria.service;
 
 import co.com.sofka.app.ferreteria.dto.FacturaDTO;
+import co.com.sofka.app.ferreteria.dto.FacturaIdDTO;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 public interface IServiceFactura {
 
@@ -17,4 +20,6 @@ public interface IServiceFactura {
     Mono<FacturaDTO> delete(String id);
 
     public void restarInventario(String facturaId , FacturaDTO facturaDTO);
+
+    Mono<List<String>> getSortedFacturaIds();
 }

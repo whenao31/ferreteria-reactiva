@@ -6,6 +6,8 @@ import lombok.Data;
 @Data
 public class ProductoDTO {
 
+    private String id;
+
     private TransaccionEnum transaccion;
 
     private String productoIdentificacion;
@@ -31,5 +33,13 @@ public class ProductoDTO {
         this.cantidad = cantidad;
         this.cantidadMaxima = cantidadMaxima;
         this.cantidadMinima = cantidadMinima;
+    }
+
+    public void addCantidad(Long cantidadAdd){
+        this.cantidad = this.cantidad + cantidadAdd;
+    }
+
+    public void subtractCantidad(Long cantidadSubtract){
+        this.cantidad = this.cantidad - cantidadSubtract;
     }
 }

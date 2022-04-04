@@ -1,0 +1,178 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+* {
+  margin: 0px;
+}
+
+.div-welcome {
+  width: 100vw;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.div-welcome img {
+  width: 25%;
+  height: 25%;
+}
+
+.div-welcome h1 {
+  font-family: 'Roboto', sans-serif;
+  color: #10137B;
+}
+
+.navbar {
+  height: 10vh;
+  background: #1b1919;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.navbar-logo {
+  color: white;
+  text-decoration: none;
+  font-size: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 10rem;
+}
+
+.nav-items {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  list-style: none;
+  text-align: center;
+  width: 70vw;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  margin-right: 2rem;
+}
+
+.nav-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 10vh;
+}
+
+.nav-item a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.1rem;
+  margin-right: 2rem;
+  padding: 6px 16px;
+  border-radius: 5px;
+}
+
+.nav-item a:hover {
+  background: #00d4d4;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background: #D7CCC8;
+}
+
+.container {
+  padding: 8% 0 0;
+  width: 365px;
+  margin: auto;
+}
+
+.form {
+  position: relative;
+  z-index: 1;
+  max-width: 350px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  background: #FFFFFF;
+}
+
+.form input {
+  font-family: "Roboto", sans-serif;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  outline: 0;
+  font-size: 15px;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background: #F5F5F5;
+}
+
+.form input ::-webkit-input-placeholder {
+  color: #90A4AE;
+}
+
+.form input :-ms-input-placeholder {
+  color: #90A4AE;
+}
+
+.form input ::-ms-input-placeholder {
+  color: #90A4AE;
+}
+
+.form input ::placeholder {
+  color: #90A4AE;
+}
+
+.form .btn {
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  outline: 0;
+  border: 0;
+  width: 100%;
+  padding: 15px;
+  background: #312e2d;
+  color: #FAFAFA;
+  text-transform: uppercase;
+}
+
+.form .message {
+  color: #90A4AE;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+}
+
+.form .message a {
+  text-decoration: none;
+  color: #00BFA5;
+}
+
+.form .register-form {
+  display: none;
+}
+/*# sourceMappingURL=index.css.map */

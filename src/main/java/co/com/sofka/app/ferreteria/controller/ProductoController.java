@@ -1,6 +1,7 @@
 package co.com.sofka.app.ferreteria.controller;
 
 import co.com.sofka.app.ferreteria.dto.ProductoDTO;
+import co.com.sofka.app.ferreteria.dto.ProductoIdDTO;
 import co.com.sofka.app.ferreteria.service.implemented.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,7 +10,11 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-@RestController(value = "/inventario")
+import java.util.List;
+
+@RestController
+@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/inventario")
 public class ProductoController {
 
     @Autowired
@@ -37,5 +42,22 @@ public class ProductoController {
                 .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
     }
 
+    @PutMapping("/producto/{idProducto}/add/{cantidad}")
+    private Mono<ResponseEntity<ProductoDTO>> addCantidad(@PathVariable("idProducto") String idProducto, @PathVariable("cantidad") Long cantidadSumar){
+        return productoService.addCantidad(idProducto, cantidadSumar)
+                .flatMap(prod -> Mono.just(ResponseEntity.ok(prod)))
+                .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
+    }
 
+    @PutMapping("/producto/{idProducto}/subtract/{cantidad}")
+    private Mono<ResponseEntity<ProductoDTO>> subtractCantidad(@PathVariable("idProducto") String idProducto, @PathVariable("cantidad") Long cantidadRestar){
+        return productoService.subtractCantidad(idProducto, cantidadRestar)
+                .flatMap(prod -> Mono.just(ResponseEntity.ok(prod)))
+                .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
+    }
+
+    @GetMapping("/producto/sortedIds")
+    private ResponseEntity<Mono<List<String>>> getLastId(){
+        return new ResponseEntity<Mono<List<String>>>(productoService.getSortedProductIds(), HttpStatus.OK);
+    }
 }
