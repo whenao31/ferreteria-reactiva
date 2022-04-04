@@ -3,10 +3,13 @@ package co.com.sofka.app.ferreteria.collection;
 import co.com.sofka.app.ferreteria.model.TransaccionEnum;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @Data
@@ -16,24 +19,29 @@ public class AlmacenTransaccion {
     @Id
     private String id = UUID.randomUUID().toString().substring(0, 10);
 
-    private HashMap<String, Long> items;
+    private Map<String, Long> items;
 
+    @NotBlank
     private TransaccionEnum transaccion;
 
     //Campos Producto
+    @NotBlank
+    @Indexed(unique=true)
     private String productoIdentificacion;
-
+    @NotBlank
     private String nombreProducto;
 
     private Double precio;
 
     private Long cantidad;
 
+    @NotBlank
     private Long cantidadMaxima;
-
+    @NotBlank
     private Long cantidadMinima;
 
 //    Campos Factura
+    @Indexed(unique=true)
     private String facturaIdentificacion;
 
     private LocalDate fecha;
@@ -58,7 +66,7 @@ public class AlmacenTransaccion {
     public AlmacenTransaccion() {
     }
 
-    public AlmacenTransaccion(String id, HashMap<String, Long> items, TransaccionEnum transaccion, String idProducto, String nombreProducto, Double precio, Long cantidad, Long cantidadMaxima, Long cantidadMinima, String idFactura, LocalDate fecha, String nombreCliente, String idCliente, String telefonoCliente, String nombreVendedor, Double total, String idVolante, String nombreProveedor, String idProveedor) {
+    public AlmacenTransaccion(String id, Map<String, Long> items, TransaccionEnum transaccion, String idProducto, String nombreProducto, Double precio, Long cantidad, Long cantidadMaxima, Long cantidadMinima, String idFactura, LocalDate fecha, String nombreCliente, String idCliente, String telefonoCliente, String nombreVendedor, Double total, String idVolante, String nombreProveedor, String idProveedor) {
         this.id = id;
         this.items = items;
         this.transaccion = transaccion;

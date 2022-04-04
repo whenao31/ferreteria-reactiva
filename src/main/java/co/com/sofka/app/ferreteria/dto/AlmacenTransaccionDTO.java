@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @Data
@@ -12,7 +13,7 @@ public class AlmacenTransaccionDTO {
 
     private String id = UUID.randomUUID().toString().substring(0, 10);
 
-    private HashMap<String, Long> items;
+    private Map<String, Long> items;
 
     private TransaccionEnum transaccion;
 
@@ -54,7 +55,7 @@ public class AlmacenTransaccionDTO {
     public AlmacenTransaccionDTO() {
     }
 
-    public AlmacenTransaccionDTO(String id, HashMap<String, Long> items, TransaccionEnum transaccion, String idProducto, String nombreProducto, Double precio, Long cantidad, Long cantidadMaxima, Long cantidadMinima, String idFactura, LocalDate fecha, String nombreCliente, String idCliente, String telefonoCliente, String nombreVendedor, Double total, String idVolante, String nombreProveedor, String idProveedor) {
+    public AlmacenTransaccionDTO(String id, Map<String, Long> items, TransaccionEnum transaccion, String idProducto, String nombreProducto, Double precio, Long cantidad, Long cantidadMaxima, Long cantidadMinima, String idFactura, LocalDate fecha, String nombreCliente, String idCliente, String telefonoCliente, String nombreVendedor, Double total, String idVolante, String nombreProveedor, String idProveedor) {
         this.id = id;
         this.items = items;
         this.transaccion = transaccion;

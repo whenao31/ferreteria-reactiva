@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @Data
@@ -18,14 +19,14 @@ public class VolanteDTO {
 
     private String proveedorIdentificacion;
 
-    private HashMap<String, Long> items;
+    private Map<String, Long> items;
 
     private TransaccionEnum transaccion;
 
     public VolanteDTO() {
     }
 
-    public VolanteDTO(String id, String volanteIdentificacion, LocalDate fecha, String proveedorIdentificacion, HashMap<String, Long> items, TransaccionEnum transaccion) {
+    public VolanteDTO(String id, String volanteIdentificacion, LocalDate fecha, String proveedorIdentificacion, Map<String, Long> items, TransaccionEnum transaccion) {
         this.id = id;
         this.volanteIdentificacion = volanteIdentificacion;
         this.fecha = fecha;

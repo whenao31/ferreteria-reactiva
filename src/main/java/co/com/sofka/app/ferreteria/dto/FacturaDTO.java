@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Map;
 
 @Data
 public class FacturaDTO {
@@ -25,7 +26,7 @@ public class FacturaDTO {
 
     private Double total;
 
-    private HashMap<String, Long> items;
+    private Map<String, Long> items;
 
     private TransaccionEnum transaccion;
 }
