@@ -15,7 +15,7 @@ const Navbar = () => {
 
                 <ul className="nav-items">
                     <li>
-                        <Link to='/' className="navbar-logo">
+                        <Link to='/inventario' className="navbar-logo">
                             {/* <a className="navbar-brand" href="#"> */}
                             <img src={Logo} alt="" width="80" height="40" className="d-inline-block align-text-middle" />
                             {/* </a> */}

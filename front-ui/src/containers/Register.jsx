@@ -3,6 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/credentials";
 import Validate from "../components/Validate";
+import '../assets/styles/containers/login.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faUserPlus} from '@fortawesome/free-solid-svg-icons'
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -27,7 +30,7 @@ const Register = () => {
       if (error.code === "auth/invalid-email") {
         setError("Email Invalido");
       } else if (error.code === "auth/weak-password") {
-        setError("La contraseña debe tener 6 o más caracteres");
+        setError("La contraseña debe ser de mas de 6 catacteres");
       } else if (error.code === "auth/email-already-in-use") {
         setError("El usuario ya esta registrado");
       }
@@ -35,8 +38,8 @@ const Register = () => {
   };
 
   return (
-    <div className="bg-slate-300 h-screen flex text-white">
-      <div className="w-full max-w-xs m-auto">
+    <div className="containerform">
+      <div className="form">
         {error && <Validate message={error} />}
         <form
           onSubmit={handleSubmit}
@@ -73,10 +76,9 @@ const Register = () => {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
+          <FontAwesomeIcon icon={faUserPlus} />
           <button
-            className="bg-blue-500 hover:bg-blue-700
-        text-white text-sm font-bold py-2 px-4 rounded
-        focus:outline-none focus:shadow-outline "
+            className="btn "
           >
             Registro
           </button>

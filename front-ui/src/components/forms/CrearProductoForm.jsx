@@ -99,7 +99,7 @@ const CrearProductoForm = () => {
     };
 
     return (
-        <div className="container">
+        <div className="containerform">
             <h2>Crear producto</h2>
             <form onSubmit={handleSubmit}>
                 <input 
@@ -118,6 +118,7 @@ const CrearProductoForm = () => {
                     className="left field" 
                     readOnly
                 />
+                <br/>
                 <label>
                     Cantidad maxima(un.)
                     <input

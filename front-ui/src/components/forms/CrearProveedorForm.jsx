@@ -61,7 +61,7 @@ const CrearProveedorForm = () => {
     };
 
     return (
-        <div className="container">
+        <div className="containerform">
             <h2>Crear proveedor</h2>
             <form onSubmit={handleSubmit}>
                 <input 

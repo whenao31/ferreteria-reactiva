@@ -8,6 +8,8 @@ import 'sweetalert2/src/sweetalert2.scss'
 import { aumentarProducto } from "../../redux/actions/productosAPIActions";
 import { separarIdNombre } from "../../utils/separateIdNombreProducto";
 import { postVolantes } from "../../redux/actions/volanteAPIActions";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faCirclePlus} from '@fortawesome/free-solid-svg-icons'
 
 
 const CrearVolanteForm = () => {
@@ -131,7 +133,7 @@ const CrearVolanteForm = () => {
     }
 
     return (
-        <div className="container">
+        <div className="containerform">
             <h2>Crear Volante</h2>
             <form onSubmit={submitProductosHandler}>
                 <label>
@@ -193,7 +195,11 @@ const CrearVolanteForm = () => {
                     </label>
                     
                 </div>
+                <div className="align-bottom" style={{fontSize:"30px", color:"blue"}}>
                 <input type="submit" value="Agregar Producto" className="btn btn-outline-info mt-2" />
+                <FontAwesomeIcon icon={faCirclePlus} />
+                </div>
+                
             </form>
             <div class="col-md-12 text-center">
                 <button className='btn btn-primary mt-3' onClick={crearVolanteHandler} >Crear Volante</button>
