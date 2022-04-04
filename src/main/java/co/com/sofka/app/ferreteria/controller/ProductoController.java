@@ -56,7 +56,7 @@ public class ProductoController {
                 .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
     }
 
-    @GetMapping("/producto/ultimoId")
+    @GetMapping("/producto/sortedIds")
     private ResponseEntity<Mono<List<String>>> getLastId(){
         return new ResponseEntity<Mono<List<String>>>(productoService.getSortedProductIds(), HttpStatus.OK);
     }
