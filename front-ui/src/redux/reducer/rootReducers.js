@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import getProductos, {aumentarCantidadProducto} from "./reducerAPIProductos";
+import getProductos, {createProductoReducer, aumentarCantidadProducto, disminuirCantidadProducto} from "./reducerAPIProductos";
 import selectProductos from "./reducerTableSelectedProducts";
 import getProductoLastId, { manageProductosLocal } from './reducerCrearProductos'
 import getVolantes, {postVolantes} from "./reducerAPIVolante";
@@ -8,6 +8,8 @@ import {crearNuevoProveedor, crearNuevoVolanteId, productoVolanteReducer} from '
 const rootReducers = combineReducers({
     getProductos,
     aumentarCantidadProducto,
+    disminuirCantidadProducto,
+    createProductoReducer,
     selectProductos,
     getProductoLastId,
     manageProductosLocal,

@@ -5,6 +5,9 @@ import { useCustomForm } from "../../customhook/useCustomForm";
 import { manageProductosLocal } from "../../redux/actions/crearProductoActions";
 import genConsecutivo from "../../utils/genConsecutivo";
 import "react-toastify/dist/ReactToastify.css";
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import 'sweetalert2/src/sweetalert2.scss'
+import { createProductos } from "../../redux/actions/productosAPIActions";
 
 
 const CrearProductoForm = () => {
@@ -33,14 +36,55 @@ const CrearProductoForm = () => {
 
     const {nombreProducto, } = inputs;
 
-    const handleSubmit = (event) => {
-        
+    // Control del input select cantidad
+    const [cantidadMaxProducto, handleCantidadMaxChange, resetCantidadMax] = useCustomForm({
+        cantidadMaxima: "",
+    });
 
+    const {cantidadMaxima, } = cantidadMaxProducto;
+
+    // Control del input select cantidad
+    const [cantidadMinProducto, handleCantidadMinChange, resetCantidadMin] = useCustomForm({
+        cantidadMinima: "",
+    });
+
+    const {cantidadMinima, } = cantidadMinProducto;
+
+    const handleSubmit = (event) => {
         event.preventDefault();
+
+        if(cantidadMaxima < 100 ){
+            Swal.fire({
+                icon: 'error',
+                title: 'Validar...',
+                text: 'La cantidad maxima debe ser mayor a 100',
+              })
+              return ;
+        }
+        if(cantidadMinima < 0 ){
+            Swal.fire({
+                icon: 'error',
+                title: 'Validar...',
+                text: 'La cantidad debe ser mayor o igual a 0',
+              })
+              return ;
+        }
         if (!nombreProducto.trim()){
             setState(true);
             return;         
         }
+        console.log(consecutivoState);
+        const body = {
+            transaccion: "PRODUCTO",
+            productoIdentificacion: consecutivoState,
+            nombreProducto: nombreProducto,
+            cantidadMaxima: cantidadMaxima,
+            cantidadMinima: cantidadMinima
+        }
+        console.log(JSON.stringify(body));
+
+        dispatch(createProductos(body))
+
         dispatch(manageProductosLocal({
             productoIdentificacion: consecutivoState,
             nombreProducto:nombreProducto
@@ -48,6 +92,8 @@ const CrearProductoForm = () => {
         toast.success("Producto creado");
         setState(false);
         reset();
+        resetCantidadMax();
+        resetCantidadMin();
     };
 
     return (
@@ -70,6 +116,30 @@ const CrearProductoForm = () => {
                     className="left field" 
                     readOnly
                 />
+                <label>
+                    Cantidad maxima(un.)
+                    <input
+                        name="cantidadMaxima"
+                        type="number"
+                        id="cantidad"
+                        value={cantidadMaxima}
+                        placeholder="Cantidad maxima"
+                        className="input-cantidad ml-2 mt-2"
+                        onChange={handleCantidadMaxChange}
+                    />
+                </label>
+                <label>
+                    Cantidad minima(un.)
+                    <input
+                        name="cantidadMinima"
+                        type="number"
+                        id="cantidadMinima"
+                        value={cantidadMinima}
+                        placeholder="Cantidad minima"
+                        className="input-cantidad ml-2 mt-2"
+                        onChange={handleCantidadMinChange}
+                    />
+                </label>
                 <input type='submit' className='btn btn-outline-info'/>
                 <ToastContainer autoClose={500} />
             </form>

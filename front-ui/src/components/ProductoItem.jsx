@@ -1,5 +1,8 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import 'sweetalert2/src/sweetalert2.scss'
+import { disminuirProducto } from '../redux/actions/productosAPIActions';
 import { removeProductoVolante } from '../redux/actions/volanteCrearActions';
 
 function ProductoItem({productId, nombre, cantidad}) {
@@ -8,7 +11,25 @@ function ProductoItem({productId, nombre, cantidad}) {
     const dispatch = useDispatch();
     
     const handleClick = () => {
-        dispatch(removeProductoVolante(productId));    
+        Swal.fire({
+            title: 'Do you want to save the changes?',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Remover',
+            denyButtonText: `No remover`,
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              Swal.fire('Eliminado Satisfactoriamente', '', 'success')
+            //   dispatch(removeProductoVolante(productId));
+                // disminuir cantidad en el backend
+              dispatch(disminuirProducto(productId, cantidad))
+            } else if (result.isDenied) {
+              Swal.fire('Changes are not saved', '', 'info')
+              return;
+            }
+          })
+            
     }
 
     return (

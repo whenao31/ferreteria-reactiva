@@ -8,6 +8,8 @@ import genConsecutivo from "../../utils/genConsecutivo";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
 import { aumentarProducto } from "../../redux/actions/productosAPIActions";
+import { separarIdNombre } from "../../utils/separateIdNombreProducto";
+import { postVolantes } from "../../redux/actions/volanteAPIActions";
 
 
 const CrearVolanteForm = () => {
@@ -86,17 +88,20 @@ const CrearVolanteForm = () => {
                   return ; 
             }
         }
-        //Modifico cantidad en backend
+        //Modificar cantidad en backend
         dispatch(aumentarProducto(productoIdentificacion, cantidad));
-        //Adiciono a la lista de productos del volante
-        dispatch(addProductoVolante({
-            productoIdentificacion: productoIdentificacion,
-            cantidad: cantidad,
-        }))
     }
 
     const crearVolanteHandler = (event) =>{
         event.preventDefault();
+        if(!proveedorId.proveedorIdentificacion.trim('') ){
+            Swal.fire({
+                icon: 'error',
+                title: 'Validar...',
+                text: 'Debe seleccionar un proveedor',
+              })
+              return ;
+        }
         if (productosVolanteSeleccion.length < 1){
             Swal.fire({
                 icon: 'error',
@@ -104,7 +109,27 @@ const CrearVolanteForm = () => {
                 text: 'Debe tener productos en la lista para crear el volante',
               })
               return ;
+        }        
+        const prodList = productosVolanteSeleccion.map(item => {
+            const id = separarIdNombre(item.productoIdentificacion)[0];
+            const cantidad = item.cantidad;
+            return { key: id , value: parseInt(cantidad) }
+        })
+        var productosObject = Object.fromEntries(prodList.map(item => [item.key, item.value]));
+        let date = new Date()
+        let day = `${(date.getDate())}`.padStart(2,'0');
+        let month = `${(date.getMonth()+1)}`.padStart(2,'0');
+        let year = date.getFullYear();
+        const body = {
+            items: productosObject,
+            transaccion: "VOLANTE",
+            volanteIdentificacion: consecutivoState,
+            proveedorIdentificacion: proveedorId.proveedorIdentificacion,
+            fecha: `${year}-${month}-${day}`  
         }
+        dispatch(postVolantes(body));
+        resetCantidad()
+        resetSelect()
     }
 
     return (

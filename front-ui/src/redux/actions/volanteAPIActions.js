@@ -72,6 +72,7 @@ export const postVolantesFailure = (error) => {
 
 export const postVolantes = (request) => {
     return async (dispatch) => {
+        console.log(request);
         dispatch(postVolantesRequest());
         fetch(`${BASE_URL}volante`, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
